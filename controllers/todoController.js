@@ -9,8 +9,8 @@ export default {
 
 async function create(req, res) {
   const record = req.body
-  await todoModel.create(record)
-  res.json({ status: 'ok' })
+  const result = await todoModel.create(record)
+  res.json(result)
 } 
 async function get(req, res) {
   const todos = await todoModel.find()
@@ -23,7 +23,6 @@ async function patch(req, res) {
 } 
 async function remove(req, res) {
   const id = req.params.id
-  console.log(id);
-  const result = await todoModel.findByIdAndRemove(id)
-  res.json(result)
+  await todoModel.findByIdAndRemove(id).catch((err) => res.json({ error: err.message }) )
+  res.json({ status: 'ok' })
 } 

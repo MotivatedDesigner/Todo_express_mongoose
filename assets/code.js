@@ -59,17 +59,18 @@ class item {
 
 async function check() {
 	if (input.value != '') {
-		new item(input.value)
-
-		await fetch(TODOS_API, {
+		const response = await fetch(TODOS_API, {
 			method: 'POST',
 			body: JSON.stringify({ record: input.value }),
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		})
-
-		input.value = ''
+		const result = await response.json()
+		if(!result.error){
+			new item(result)
+			input.value = ''
+		}
 	}
 }
 
