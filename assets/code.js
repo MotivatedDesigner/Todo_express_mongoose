@@ -4,18 +4,20 @@ var input = document.querySelector('.input')
 const container = document.querySelector('.container')
 
 class item {
-	constructor(itemName) {
-		this.createDiv(itemName)
+	constructor(item) {
+		this.createDiv(item)
 	}
-	createDiv(itemName) {
+	createDiv(item) {
+		console.log(item);
 		let input = document.createElement('input')
-		input.value = itemName
+		input.value = item.record
 		input.disabled = true
 		input.classList.add('item_input')
 		input.type = 'text'
 
 		let itemBox = document.createElement('div')
 		itemBox.classList.add('item')
+		itemBox.id = item._id
 
 		let editButton = document.createElement('button')
 		editButton.innerHTML = 'EDIT'
@@ -37,11 +39,11 @@ class item {
 	}
 
 	async edit(input) {
-		const newInput = prompt('Enter new msg:', input)
+		const newInput = prompt('Enter new msg:', input.value)
 		input.value = newInput
-		await fetch('/api/modify', {
-			method: 'POST',
-			body: JSON.stringify({ old: input.value, new: newInput }),
+		await fetch(TODOS_API, {
+			method: 'PATCH',
+			body: JSON.stringify({ id: input.closest('.item')?.id, new: newInput }),
 			headers: {
 				'Content-Type': 'application/json'
 			}
@@ -78,9 +80,7 @@ async function check() {
 
 async function boot() {
 	const records = await fetch(TODOS_API).then((t) => t.json())
-	records.forEach(({ record }) => {
-		new item(record)
-	})
+	records.forEach( record => new item(record) )
 }
 
 boot()
