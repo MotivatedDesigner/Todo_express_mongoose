@@ -8,7 +8,6 @@ class item {
 		this.createDiv(item)
 	}
 	createDiv(item) {
-		console.log(item);
 		let input = document.createElement('input')
 		input.value = item.record
 		input.disabled = true
@@ -43,7 +42,7 @@ class item {
 		input.value = newInput
 		await fetch(TODOS_API, {
 			method: 'PATCH',
-			body: JSON.stringify({ id: input.closest('.item')?.id, new: newInput }),
+			body: JSON.stringify({ id: input.closest('.item')?.id, record: newInput }),
 			headers: {
 				'Content-Type': 'application/json'
 			}
