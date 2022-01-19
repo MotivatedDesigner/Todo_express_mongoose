@@ -1,0 +1,15 @@
+{
+  "name": "todo_express_mongoose",
+  "version": "1.0.0",
+  "description": "a todo app that uses Expressjs & MongoDb with Mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ayoub Elmendoub",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.1.7"
+  }
+}
