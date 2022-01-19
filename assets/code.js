@@ -53,7 +53,7 @@ class item {
 		container.removeChild(item)
 		await fetch(TODOS_API, {
 			method: 'DELETE',
-			body: JSON.stringify({ record: value }),
+			body: JSON.stringify({ id: input.closest('.item')?.id}),
 			headers: {
 				'Content-Type': 'application/json'
 			}
