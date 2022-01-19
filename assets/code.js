@@ -1,3 +1,4 @@
+const TODOS_API = '/api/todos'
 const addButton = document.querySelector('.addButton')
 var input = document.querySelector('.input')
 const container = document.querySelector('.container')
@@ -49,8 +50,8 @@ class item {
 
 	async remove(item, value) {
 		container.removeChild(item)
-		await fetch('/api/delete', {
-			method: 'POST',
+		await fetch(TODOS_API, {
+			method: 'DELETE',
 			body: JSON.stringify({ record: value }),
 			headers: {
 				'Content-Type': 'application/json'
@@ -63,7 +64,7 @@ async function check() {
 	if (input.value != '') {
 		new item(input.value)
 
-		await fetch('/api/create', {
+		await fetch(TODOS_API, {
 			method: 'POST',
 			body: JSON.stringify({ record: input.value }),
 			headers: {
@@ -76,7 +77,7 @@ async function check() {
 }
 
 async function boot() {
-	const records = await fetch('/api/get').then((t) => t.json())
+	const records = await fetch(TODOS_API).then((t) => t.json())
 	records.forEach(({ record }) => {
 		new item(record)
 	})

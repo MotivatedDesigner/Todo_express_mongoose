@@ -3,6 +3,7 @@ import { todoController } from "../controllers/index.js"
 
 const router = Router()
 
-router.post('/create', todoController.create)
+router.post('/',todoController.create)
+router.get('/',todoController.get)
 
 export default router
