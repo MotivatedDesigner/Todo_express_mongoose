@@ -3,7 +3,8 @@ import { todoModel } from "../models/index.js"
 export default {
   create,
   get,
-  patch
+  patch,
+  remove
 }
 
 async function create(req, res) {
@@ -18,5 +19,11 @@ async function get(req, res) {
 async function patch(req, res) {
   const { id, ...data } = req.body
   const result = await todoModel.findByIdAndUpdate(id, data)
+  res.json(result)
+} 
+async function remove(req, res) {
+  const id = req.params.id
+  console.log(id);
+  const result = await todoModel.findByIdAndRemove(id)
   res.json(result)
 } 
